@@ -2,6 +2,8 @@
 
 如果你平时在 WSL 里工作，又想把 Hermes Agent 的默认模型入口切到 **GitHub Copilot provider**，其实整套流程并不复杂。
 
+如果你是第一次安装 Hermes，安装过程中其实就可以直接把 **GitHub Copilot** 选成默认 provider；如果当时没选，或者想在正式切换前先把环境准备好，也可以按这篇文章里的顺序先把 `gh`、`gh copilot` 和相关验证命令都准备好，再回头调整 Hermes 配置。
+
 从零开始，大致只需要完成这几步：
 
 1. 安装 GitHub CLI（`gh`）
@@ -179,7 +181,7 @@ model:
 
 ```bash
 env -u COPILOT_GITHUB_TOKEN -u GH_TOKEN -u GITHUB_TOKEN \
-python -m hermes_cli.main chat -q "Reply with exactly: COPILOT_OK" \
+hermes chat -q "Reply with exactly: COPILOT_OK" \
   --provider copilot --model gpt-5.4
 ```
 
@@ -281,7 +283,7 @@ nano ~/.hermes/config.yaml
 
 # 验证 Hermes Copilot provider
 env -u COPILOT_GITHUB_TOKEN -u GH_TOKEN -u GITHUB_TOKEN \
-python -m hermes_cli.main chat -q "Reply with exactly: COPILOT_OK" \
+hermes chat -q "Reply with exactly: COPILOT_OK" \
   --provider copilot --model gpt-5.4
 
 # 打开 Dashboard
@@ -298,18 +300,12 @@ http://127.0.0.1:9119/
 
 ## 结语
 
-如果你想在本地 WSL 环境里把 Hermes 和 GitHub Copilot 结合起来用，这套方式是非常直接的一条路。
+如果你想在本地 WSL 环境里把 Hermes 和 GitHub Copilot 结合起来用，这套方式是一条比较直接、也比较容易复现的路径。
 
 它的好处是：
 
-- GitHub 账号体系已经在用
-- `gh` 和 `gh copilot` 本身就顺手
-- Hermes 再往上提供更完整的 agent 能力、工具调用和 Dashboard
+- GitHub 账号体系本来就在用
+- `gh` 和 `gh copilot` 这套链路本身已经比较顺手
+- Hermes 再往上补齐更完整的 agent 能力、工具调用和 Dashboard
 
-所以配好之后，整个体验会很统一。
-
-如果你愿意，下一步还可以继续把它补完整，比如：
-
-- 把 `hermes dashboard` 做成后台常驻
-- 写一个一键初始化脚本
-- 做一个新机器迁移清单
+所以一旦配好，终端和 Dashboard 的使用体验会比较统一。
